@@ -1,38 +1,50 @@
-.App {
-  text-align: center;
+.react-datepicker__day--keyboard-selected,
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected:hover,
+.react-datepicker__day--selected:hover {
+  background-color: lightcoral;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.react-datepicker__header {
+  position: relative;
+  background-color: #fff;
+}
+.react-datepicker__triangle {
+  display: none;
+}
+select {
+  border: none;
+}
+.year {
+  margin-right: 5px;
+}
+button {
+  cursor: pointer;
+  position: absolute;
+  left: 10%;
+  background: none;
+  border: none;
+}
+button.next {
+  left: 80%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.postmodal {
+  background: rgba(0, 0, 0, 0.25);
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.daum_popup {
+  position: fixed;
+  width: 500px;
+  height: 500px;
 }

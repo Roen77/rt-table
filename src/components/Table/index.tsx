@@ -6,6 +6,7 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import ExcellentExport from "excellentexport";
 
 type Person = {
   firstName: string;
@@ -44,52 +45,21 @@ const defaultData: Person[] = [
 ];
 
 const columns: ColumnDef<Person>[] = [
-  // {
-  //   header: "번호",
-  //   footer: (props) => props.column.id,
-  //   columns: [
-  //     {
-  //       accessorKey: "firstName",
-  //       cell: (info) => info.getValue(),
-  //       footer: (props) => props.column.id,
-  //     },
-  //     {
-  //       accessorFn: (row) => row.lastName,
-  //       id: "두번째칼럼 id",
-  //       cell: (info) => info.getValue(),
-  //       header: () => <span>두번째헤더</span>,
-  //       footer: (props) => props.column.id,
-  //     },
-  //   ],
-  // },
   {
+    accessorKey: "visits",
+    header: "번호",
+  },
+  {
+    accessorKey: "firstName",
     header: "Info",
-    footer: (props) => props.column.id,
     columns: [
       {
         accessorKey: "age",
         header: () => "Age",
-        footer: (props) => props.column.id,
       },
       {
+        accessorKey: "progress",
         header: "More Info",
-        columns: [
-          {
-            accessorKey: "visits",
-            header: () => <span>Visits</span>,
-            footer: (props) => props.column.id,
-          },
-          {
-            accessorKey: "status",
-            header: "Status",
-            footer: (props) => props.column.id,
-          },
-          {
-            accessorKey: "progress",
-            header: "Profile Progress",
-            footer: (props) => props.column.id,
-          },
-        ],
       },
     ],
   },
@@ -105,24 +75,34 @@ function Table() {
     getCoreRowModel: getCoreRowModel(),
   });
 
+  const onClickTest = () => {
+    return ExcellentExport.convert(
+      { anchor: "aaㅁㅁ", filename: "data_123.array", format: "xlsx" },
+      [{ name: "Sheet Name Here 1", from: { table: "testt" } }]
+    );
+  };
+
   return (
     <div className="p-2">
-      <table>
+      <table id="testt">
         <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id} colSpan={header.colSpan}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                </th>
-              ))}
-            </tr>
-          ))}
+          {table.getHeaderGroups().map((headerGroup) => {
+            console.log("ddd", table.getHeaderGroups());
+            return (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <th key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                  </th>
+                ))}
+              </tr>
+            );
+          })}
         </thead>
         <tbody>
           {table.getRowModel().rows.map((row) => (
@@ -156,6 +136,9 @@ function Table() {
       <button onClick={() => rerender()} className="border p-2">
         Rerender
       </button>
+      <a download="test.xlsx" href="#" onClick={onClickTest}>
+        Export to CSV
+      </a>
     </div>
   );
 }

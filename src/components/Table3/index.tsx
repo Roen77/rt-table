@@ -155,16 +155,16 @@ const columns: ColumnDef<Member>[] = [
   {
     accessorKey: "rank",
     header: "급수",
-    columns: [
-      {
-        accessorKey: "si",
-        header: "시도",
-      },
-      {
-        accessorKey: "gun",
-        header: "시군구",
-      },
-    ],
+    // columns: [
+    //   {
+    //     accessorKey: "si",
+    //     header: "시도",
+    //   },
+    //   {
+    //     accessorKey: "gun",
+    //     header: "시군구",
+    //   },
+    // ],
   },
   //   {
   //     accessorKey: "si",
@@ -240,7 +240,7 @@ function Table3() {
             </>
           ) : (
             table.getHeaderGroups().map((headergroup, index) => {
-              //   console.log("헤더그룹", headergroup);
+              console.log("헤더그룹dd", table.getHeaderGroups());
               if (headergroup.depth === 0) {
                 sub = headergroup.headers.find((v) => v.subHeaders.length >= 2);
                 // console.log("댑스0", sub);
@@ -251,7 +251,7 @@ function Table3() {
                 return (
                   <tr key={headergroup.id}>
                     {headergroup.headers.map((header) => {
-                      console.log("헤더그룹안의 헤더", header);
+                      console.log("헤더그룹안의 헤더33", header);
                       return (
                         <td
                           {...{
