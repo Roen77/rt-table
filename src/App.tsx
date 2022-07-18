@@ -8,6 +8,8 @@ import CustomPicker from "./components/CustomDate";
 import "react-datepicker/dist/react-datepicker.css";
 import "./App.css";
 import Postcode from "./components/PostCode";
+import ExSample from "./components/excelSample";
+import ImportExcel from "./components/ImportExcel";
 
 function App() {
   return (
@@ -15,8 +17,10 @@ function App() {
       {/* <DatePick /> */}
       {/* <CustomPicker />
       <CustomPicker /> */}
-      <Postcode />
-      <Table />
+      {/* <Postcode />
+      <Table />*/}
+      <ExSample />
+      <ImportExcel />
     </div>
   );
 }

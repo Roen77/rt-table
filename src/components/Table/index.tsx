@@ -1,5 +1,5 @@
-import React from "react";
-
+import React, { useCallback } from "react";
+import * as XLSX from "xlsx";
 import {
   ColumnDef,
   flexRender,
@@ -75,6 +75,14 @@ function Table() {
     getCoreRowModel: getCoreRowModel(),
   });
 
+  const xport = useCallback(async () => {
+    /* Create worksheet from HTML DOM TABLE */
+    const table = document.getElementById("testt");
+    const wb = XLSX.utils.table_to_book(table);
+
+    /* Export to file (start a download) */
+    XLSX.writeFile(wb, "SheetJSTable.xlsx");
+  }, []);
   const onClickTest = () => {
     return ExcellentExport.convert(
       { anchor: "aaㅁㅁ", filename: "data_123.array", format: "xlsx" },
@@ -136,9 +144,9 @@ function Table() {
       <button onClick={() => rerender()} className="border p-2">
         Rerender
       </button>
-      <a download="test.xlsx" href="#" onClick={onClickTest}>
-        Export to CSV
-      </a>
+      <button onClick={xport}>
+        <b>Export XLSX!</b>
+      </button>
     </div>
   );
 }
